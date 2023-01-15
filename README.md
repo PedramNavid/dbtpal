@@ -3,6 +3,11 @@
 dbtpal is the friend you've always wanted when developing
 dbt projects.
 
+ALERT ALERT ALERT
+
+# THIS PROJECT IS IN PROGRESS AND DOESNT WORK
+
+ALERT ALERT ALERT
 
 ## Installation
 

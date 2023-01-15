@@ -11,7 +11,7 @@ local default_config = {
   use_console = true,
   highlights = true,
   use_file = true,
-  level = "info",
+  level = "trace",
   modes = {
     { name = "trace", hl = "Comment", },
     { name = "debug", hl = "Comment", },

@@ -1,3 +1,4 @@
 /plugin/reload.vim
+db
 .luarc.json
 *.log
