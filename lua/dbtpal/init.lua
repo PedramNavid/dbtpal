@@ -18,22 +18,22 @@ M.run_command = main.run_command
 
 -- Debug keybindings to run dbt
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dbr",
-	":lua require('dbtpal').run()<CR>",
-	{ noremap = true, silent = true }
+    "n",
+    "<leader>dbr",
+    ":lua require('dbtpal').run()<CR>",
+    { noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dbd",
-	":lua require('dbtpal').debug()<CR>",
-	{ noremap = true, silent = true }
+    "n",
+    "<leader>dbd",
+    ":lua require('dbtpal').debug()<CR>",
+    { noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dbt",
-	":lua require('dbtpal').test()<CR>",
-	{ noremap = true, silent = true }
+    "n",
+    "<leader>dbt",
+    ":lua require('dbtpal').test()<CR>",
+    { noremap = true, silent = true }
 )
 
 return M
