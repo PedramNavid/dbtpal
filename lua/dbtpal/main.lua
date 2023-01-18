@@ -8,13 +8,40 @@ local function scheduled_error(err)
     vim.schedule(function() log.error(err) end)
 end
 
-M.run = function() return M.run_command("run") end
+local _cmd_select_args = function(cmd, selector, args)
+    if not selector then return M.run_command(cmd, args) end
 
-M.test = function() return M.run_command("test") end
+    if type(selector) == "string" then
+        return M.run_command(
+            cmd,
+            vim.list_extend({ "--select", selector }, args or {})
+        )
+    end
 
-M.compile = function() return M.run_command("compile") end
+    if type(selector) == "table" then
+        return M.run_command(
+            cmd,
+            vim.list_extend(
+                { "--select", table.concat(selector, " ") },
+                args or {}
+            )
+        )
+    end
+end
 
-M.build = function() return M.run_command("build") end
+M.run = function(selector, args) return _cmd_select_args("run", selector, args) end
+
+M.test = function(selector, args)
+    return _cmd_select_args("test", selector, args)
+end
+
+M.compile = function(selector, args)
+    return _cmd_select_args("compile", selector, args)
+end
+
+M.build = function(selector, args)
+    return _cmd_select_args("build", selector, args)
+end
 
 M.debug = function() return M.run_command("debug") end
 
