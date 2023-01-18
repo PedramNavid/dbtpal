@@ -57,7 +57,7 @@ describe("dbtpal", function()
 
     it("can run dbt with multiple model selectors in a table", function()
         local dbt = require("dbtpal")
-        local result = dbt.run({"tag:nightly", "my_model", "finance.base.*"})
+        local result = dbt.run({ "tag:nightly", "my_model", "finance.base.*" })
         assert.are.equal(result.command, "dbt")
         assert.are.equal(result.args[3], "run")
         assert.are.equal(result.args[4], "--select")
@@ -67,8 +67,8 @@ describe("dbtpal", function()
     it("can run dbt with multiple model selectors and args", function()
         local dbt = require("dbtpal")
         local result = dbt.run(
-        {"tag:nightly", "my_model", "finance.base.*"},
-        {"--full-refresh", "--threads 4"}
+            { "tag:nightly", "my_model", "finance.base.*" },
+            { "--full-refresh", "--threads 4" }
         )
         assert.are.equal(result.command, "dbt")
         assert.are.equal(result.args[3], "run")
@@ -77,5 +77,4 @@ describe("dbtpal", function()
         assert.are.equal(result.args[6], "--full-refresh")
         assert.are.equal(result.args[7], "--threads 4")
     end)
-
 end)
