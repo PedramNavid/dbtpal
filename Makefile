@@ -1,6 +1,6 @@
 fmt:
 	@echo "Formatting code..."
-	stylua lua/
+	stylua --check .
 
 test:
 	@echo "Running tests..."
