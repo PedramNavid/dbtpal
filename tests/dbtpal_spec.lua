@@ -1,10 +1,12 @@
 describe("dbtpal", function()
-    before_each(function()
-        require("dbtpal").setup({
-            path_to_project = "./tests/dbt_project/",
-            path_to_profiles_dir = "./tests/dbt_project/"
-        })
-    end)
+    before_each(
+        function()
+            require("dbtpal").setup({
+                path_to_project = "./tests/dbt_project/",
+                path_to_profiles_dir = "./tests/dbt_project/",
+            })
+        end
+    )
 
     it("can be required", function() require("dbtpal") end)
 
@@ -74,7 +76,8 @@ describe("dbtpal", function()
 
     it("can run dbt with multiple model selectors in a table", function()
         local dbt = require("dbtpal")
-        local result = dbt.run_model({ "tag:nightly", "my_model", "finance.base.*" })
+        local result =
+            dbt.run_model({ "tag:nightly", "my_model", "finance.base.*" })
         assert.are.equal(result.command, "dbt")
         assert.are.equal(result.args[2], "run")
         assert.are.equal(result.args[3], "--select")
