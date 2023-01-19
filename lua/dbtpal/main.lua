@@ -1,4 +1,5 @@
 local config = require("dbtpal.config")
+local projects = require("dbtpal.projects")
 local log = require("dbtpal.log")
 local display = require("dbtpal.display")
 
@@ -29,28 +30,58 @@ local _cmd_select_args = function(cmd, selector, args)
     end
 end
 
-M.run = function(selector, args) return _cmd_select_args("run", selector, args) end
+local _run = function(selector, args)
+    return _cmd_select_args("run", selector, args)
+end
 
-M.test = function(selector, args)
+local _test = function(selector, args)
     return _cmd_select_args("test", selector, args)
 end
 
-M.compile = function(selector, args)
+local _compile = function(selector, args)
     return _cmd_select_args("compile", selector, args)
 end
 
-M.build = function(selector, args)
+local _build = function(selector, args)
     return _cmd_select_args("build", selector, args)
 end
+
+M.run_all = function(args) return _run(nil, args) end
+
+M.run_model = function(selector, args) return _run(selector, args) end
+
+M.run = function() return _run(vim.fn.expand("%:t:r")) end
+
+M.test_all = function(args) return _test(nil, args) end
+
+M.test_model = function(selector, args) return _test(selector, args) end
+
+M.test = function() return _run(vim.fn.expand("%:t:r")) end
+
+M.compile = function(selector, args) return _compile(selector, args) end
+
+M.build = function(selector, args) return _build(selector, args) end
 
 M.debug = function() return M.run_command("debug") end
 
 M.run_command = function(cmd, args)
-    -- cmd is a dbt command, e.g. "run", "test", "compile", "build", "debug"
-    -- args is a table of additional arguments to pass to dbt
-    --
-    -- in reality, both cmd and args are arguments since the
-    -- actual command to run is `dbt`
+    if config.options.path_to_project == "" then
+        log.debug("path_to_dbt is not set, attempting to autofind.")
+        local bpath = vim.fn.expand("%:p:h")
+        local found = projects.find_project_dir(bpath)
+        if found ~= nil then
+            config.options.path_to_project = found
+        else
+            log.error(
+                "Could not find dbt project in path: "
+                    .. bpath
+                    .. "."
+                    .. "and path not explicitly set. Try setting path_to_project in your "
+                    .. "config. See :help dbtpal-config"
+            )
+            return
+        end
+    end
 
     local Job = require("plenary.job")
     local on_exit = function(data)
@@ -64,7 +95,6 @@ M.run_command = function(cmd, args)
 
     local cmd_args = {}
     local pre_cmd_args = {
-        "--debug",
         "--no-use-colors",
     }
 
@@ -83,6 +113,13 @@ M.run_command = function(cmd, args)
     if args ~= nil then vim.list_extend(cmd_args, args) end
 
     vim.list_extend(cmd_args, post_cmd_args)
+
+    log.debug(
+        "Running dbt command: "
+            .. dbt_path
+            .. " "
+            .. table.concat(cmd_args, " ")
+    )
 
     local job = Job:new({
         command = dbt_path,
