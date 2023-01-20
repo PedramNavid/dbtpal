@@ -94,8 +94,12 @@ M.run_command = function(cmd, args)
     local dbt_profile = config.options.path_to_profiles_dir
 
     local cmd_args = {}
+
+    -- TODO: make this configurable
     local pre_cmd_args = {
-        "--no-use-colors",
+        "--use-colors",
+        "--printer-width",
+        "10",
     }
 
     local post_cmd_args = {
