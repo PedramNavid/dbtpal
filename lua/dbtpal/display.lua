@@ -27,6 +27,8 @@ local function popup(title, data, opts)
     local win = vim.api.nvim_open_win(buf, true, win_opts)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, data)
 
+    vim.api.nvim_buf_set_keymap(buf, "n", "q", ":q<CR>", {})
+
     return win, buf
 end
 
