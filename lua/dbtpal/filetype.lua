@@ -1,22 +1,22 @@
 -- Filetype helpers for dbt, many of the ideas for these commands
 -- are borrowed from jgillies and his vim-dbt plugin
 
-local projects = require('dbtpal.projects')
+local projects = require("dbtpal.projects")
 
-vim.api.nvim_create_augroup('dbtPal', {})
+vim.api.nvim_create_augroup("dbtPal", {})
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = "dbtPal",
     pattern = { "*.sql" },
     command = "set filetype=dbt suffixesadd+=.sql",
-    desc = "Enable gf (go to file) under cursor)"
+    desc = "Enable gf (go to file) under cursor)",
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = "dbtPal",
     pattern = { "*.md", "*.yml" },
     command = "set suffixesadd+=.sql",
-    desc = "Enable gf (go to file) under cursor)"
+    desc = "Enable gf (go to file) under cursor)",
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -29,12 +29,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
             vim.opt.path:append(projPath .. "/models/**")
         end
     end,
-    desc = "Look for files within dbt project folders"
+    desc = "Look for files within dbt project folders",
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = "dbtPal",
     pattern = { "*/target/run/*.sql", "*/target/compiled/*.sql" },
     command = "setlocal nomodifiable",
-    desc = "Look for files within dbt project folders"
+    desc = "Look for files within dbt project folders",
 })

@@ -1,13 +1,10 @@
-local log = require("dbtpal.log")
 local M = {}
 
 local function popup(title, data, opts)
-    local name = 'dbtpalConsole'
+    local name = "dbtpalConsole"
     local cur = vim.fn.bufnr(name)
 
-    if cur and cur ~= -1 then
-        vim.api.nvim_buf_delete(cur, { force = true })
-    end
+    if cur and cur ~= -1 then vim.api.nvim_buf_delete(cur, { force = true }) end
 
     local columns = vim.o.columns
     local lines = vim.o.lines
@@ -33,9 +30,7 @@ local function popup(title, data, opts)
     vim.api.nvim_buf_set_name(buf, name)
     local chan = vim.api.nvim_open_term(buf, {})
 
-    local push = function(line)
-        vim.api.nvim_chan_send(chan, line)
-    end
+    local push = function(line) vim.api.nvim_chan_send(chan, line) end
 
     for _, line in ipairs(data) do
         push(string.format("> %s\r\n", line))

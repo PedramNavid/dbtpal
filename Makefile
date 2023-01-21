@@ -2,6 +2,10 @@ fmt:
 	@echo "Formatting code..."
 	stylua --check .
 
+fix:
+	@echo "Fixing code..."
+	stylua .
+
 test:
 	@echo "Running tests..."
 	nvim --headless --clean \
