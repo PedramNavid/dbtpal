@@ -33,8 +33,6 @@ local function popup(title, data, opts)
     vim.api.nvim_buf_set_name(buf, name)
     local chan = vim.api.nvim_open_term(buf, {})
 
-    -- loop over every line in the table
-    -- and send it to the terminal
     local push = function(line)
         vim.api.nvim_chan_send(chan, line)
     end
@@ -44,7 +42,6 @@ local function popup(title, data, opts)
     end
 
     push("\r\n ---- Press q to quit ----- \r\n")
-    --vim.api.nvim_buf_set_lines(buf, 0, -1, false, data)
     vim.api.nvim_buf_set_keymap(buf, "n", "q", ":q<CR>", {})
 
     return win, buf

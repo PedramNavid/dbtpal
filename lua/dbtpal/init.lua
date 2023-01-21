@@ -4,6 +4,9 @@ define here the lua functions that activate the plugin ]]
 local main = require("dbtpal.main")
 local config = require("dbtpal.config")
 
+-- TODO: Set option to selectively load this
+require("dbtpal.filetype")
+
 local M = {}
 
 M.setup = config.setup
