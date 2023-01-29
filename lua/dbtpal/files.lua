@@ -5,10 +5,11 @@ local projects = require("dbtpal.projects")
 
 vim.api.nvim_create_augroup("dbtPal", {})
 
+-- TODO: this should be configurable by the user
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     group = "dbtPal",
     pattern = { "*.sql" },
-    command = "set filetype=dbt suffixesadd+=.sql",
+    command = "set filetype=dbt syntax=dbt suffixesadd+=.sql",
     desc = "Enable gf (go to file) under cursor)",
 })
 
@@ -38,3 +39,4 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     command = "setlocal nomodifiable",
     desc = "Look for files within dbt project folders",
 })
+

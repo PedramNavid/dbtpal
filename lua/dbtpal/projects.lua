@@ -10,7 +10,6 @@ M.find_project_dir = function(fpath)
         log.warn("No dbt project found in " .. path)
         return nil
     end
-    vim.notify("Found dbt project in " .. dbt_project)
     return vim.fn.fnamemodify(dbt_project, ":p:h")
 end
 return M

@@ -5,7 +5,7 @@ local main = require("dbtpal.main")
 local config = require("dbtpal.config")
 
 -- TODO: Set option to selectively load this
-require("dbtpal.filetype")
+require("dbtpal.files")
 
 local M = {}
 
@@ -35,8 +35,16 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>dbt",
+    "<leader>dt",
     ":lua require('dbtpal').test()<CR>",
+    { noremap = true, silent = true }
+)
+
+
+-- TODO: delete these
+vim.api.nvim_set_keymap('n', "<leader>\\", ":set syntax=sql<CR>", { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap('n', "<leader>]", ":set syntax=dbt<CR>",
     { noremap = true, silent = true }
 )
 
