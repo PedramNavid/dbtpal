@@ -39,4 +39,3 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     command = "setlocal nomodifiable",
     desc = "Look for files within dbt project folders",
 })
-

@@ -63,14 +63,17 @@ describe("dbtpal", function()
         -- TODO: how to set buf name for test?
         assert.are.equal(result.command, "dbt")
         assert.True(table.concat(result.args, " "):find("run") ~= nil)
-
     end)
 
     it("can run dbt with multiple model selectors", function()
         local dbt = require("dbtpal")
         local result = dbt.run_model("tag:nightly my_model finance.base.*")
         assert.are.equal(result.command, "dbt")
-        for _, cmd in ipairs({ "run", "--select", "tag:nightly my_model finance.base.*" }) do
+        for _, cmd in ipairs({
+            "run",
+            "--select",
+            "tag:nightly my_model finance.base.*",
+        }) do
             assert.True(table.concat(result.args, " "):find(cmd) ~= nil)
         end
     end)
@@ -78,8 +81,12 @@ describe("dbtpal", function()
     it("can run dbt with multiple model selectors in a table", function()
         local dbt = require("dbtpal")
         local result =
-        dbt.run_model({ "tag:nightly", "my_model", "finance.base.*" })
-        for _, cmd in ipairs({ "run", "--select", "tag:nightly my_model finance.base.*" }) do
+            dbt.run_model({ "tag:nightly", "my_model", "finance.base.*" })
+        for _, cmd in ipairs({
+            "run",
+            "--select",
+            "tag:nightly my_model finance.base.*",
+        }) do
             assert.True(table.concat(result.args, " "):find(cmd) ~= nil)
         end
     end)
@@ -91,8 +98,15 @@ describe("dbtpal", function()
             { "--full-refresh", "--threads 4" }
         )
 
-        for _, cmd in ipairs({ "run", "--select", "tag:nightly", "my_model",
-            "finance.base.*", "--full%-refresh", "--threads 4" }) do
+        for _, cmd in ipairs({
+            "run",
+            "--select",
+            "tag:nightly",
+            "my_model",
+            "finance.base.*",
+            "--full%-refresh",
+            "--threads 4",
+        }) do
             assert.True(table.concat(result.args, " "):find(cmd) ~= nil)
         end
         assert.are.equal(result.command, "dbt")

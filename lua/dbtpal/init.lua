@@ -40,11 +40,17 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
-
 -- TODO: delete these
-vim.api.nvim_set_keymap('n', "<leader>\\", ":set syntax=sql<CR>", { noremap = true, silent = true }
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>\\",
+    ":set syntax=sql<CR>",
+    { noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap('n', "<leader>]", ":set syntax=dbt<CR>",
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>]",
+    ":set syntax=dbt<CR>",
     { noremap = true, silent = true }
 )
 
