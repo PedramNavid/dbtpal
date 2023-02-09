@@ -8,9 +8,9 @@ fix:
 
 test:
 	@echo "Running tests..."
-	nvim --headless --clean \
-	-u scripts/minimal.vim \
-	-c "PlenaryBustedDirectory tests {minimal_init = './tests/init.lua'}"
+	nvim --headless --noplugin \
+	-u tests/minimal.vim \
+	-c "PlenaryBustedDirectory tests/ {minimal_init = './tests/minimal.vim'}"
 
 lint:
 	@echo "Linting..."

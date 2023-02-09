@@ -2,40 +2,58 @@
 -- are borrowed from jgillies and his vim-dbt plugin
 
 local projects = require "dbtpal.projects"
+local config = require "dbtpal.config"
 
 vim.api.nvim_create_augroup("dbtPal", {})
 
+if config.options.custom_dbt_syntax_enabled then
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*.sql" },
+        command = "set filetype=dbt syntax=dbt",
+        desc = "Enable custom dbt syntax",
+    })
+end
+
 -- TODO: this should be configurable by the user
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = "dbtPal",
-  pattern = { "*.sql" },
-  command = "set filetype=dbt syntax=dbt suffixesadd+=.sql",
-  desc = "Enable gf (go to file) under cursor)",
-})
+if config.options.extended_path_search then
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*.sql" },
+        command = "set suffixesadd+=.sql",
+        desc = "Enable gf (go to file) under cursor)",
+    })
+end
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = "dbtPal",
-  pattern = { "*.md", "*.yml" },
-  command = "set suffixesadd+=.sql",
-  desc = "Enable gf (go to file) under cursor)",
-})
+if config.options.extended_path_search then
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*.md", "*.yml" },
+        command = "set suffixesadd+=.sql",
+        desc = "Enable gf (go to file) under cursor)",
+    })
+end
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = "dbtPal",
-  pattern = { "*.sql", "*.yml", "*.md" },
-  callback = function(ev)
-    local projPath = projects.find_project_dir(ev.file)
-    if projPath then
-      vim.opt.path:append(projPath .. "/macros/**")
-      vim.opt.path:append(projPath .. "/models/**")
-    end
-  end,
-  desc = "Look for files within dbt project folders",
-})
+if config.options.extended_path_search then
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*.sql", "*.yml", "*.md" },
+        callback = function(ev)
+            local projPath = projects.detect_dbt_project_dir(ev.file)
+            if projPath then
+                vim.opt.path:append(config.options.path_to_dbt_project .. "/macros/**")
+                vim.opt.path:append(config.options.path_to_dbt_project .. "/models/**")
+            end
+        end,
+        desc = "Look for files within dbt project folders",
+    })
+end
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = "dbtPal",
-  pattern = { "*/target/run/*.sql", "*/target/compiled/*.sql" },
-  command = "setlocal nomodifiable",
-  desc = "Look for files within dbt project folders",
-})
+if config.options.protect_compiled_target_files then
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*/target/run/*.sql", "*/target/compiled/*.sql" },
+        command = "set filetype=dbtCompiledSQL syntax=dbt",
+        desc = "Look for files within dbt project folders",
+    })
+end

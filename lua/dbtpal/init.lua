@@ -3,11 +3,10 @@ define here the lua functions that activate the plugin ]]
 
 local main = require "dbtpal.main"
 local config = require "dbtpal.config"
-local dbt_picker = require("dbtpal.telescope").dbt_picker
-
--- TODO: Set option to selectively load this
+local log = require "dbtpal.log"
 require "dbtpal.files"
 
+log.trace "dbtpal initialized"
 local M = {}
 
 M.setup = config.setup
@@ -24,16 +23,12 @@ M.test_model = main.test_model
 M.compile = main.compile
 M.build = main.build
 
-M.run_command = main.telescope_models
+M.run_command = main.run_command
 M.debug = main.debug
 
 -- Debug keybindings to run dbt
 vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dbtpal').run()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dt", ":lua require('dbtpal').test()<CR>", { noremap = true, silent = true })
 
--- TODO: delete these
-vim.api.nvim_set_keymap("n", "<leader>\\", ":set syntax=sql<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>]", ":set syntax=dbt<CR>", { noremap = true, silent = true })
-
-M.dbt_picker = dbt_picker
+M.dbt_picker = require("dbtpal.telescope").dbt_picker
 return M
