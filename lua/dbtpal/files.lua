@@ -49,7 +49,7 @@ if config.options.extended_path_search then
     })
 end
 
-if config.options.protect_compiled_target_files then
+if config.options.protect_compiled_files then
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
         group = "dbtPal",
         pattern = { "*/target/run/*.sql", "*/target/compiled/*.sql" },

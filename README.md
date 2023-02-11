@@ -49,7 +49,7 @@ use {'pdrmnvd/dbtpal',
           extended_path_search = true,
 
           -- Prevent modifying sql files in target/(compiled|run) folders
-          protect_compiled_target_files = true
+          protect_compiled_files = true
 
         }
 
@@ -67,72 +67,84 @@ use {'pdrmnvd/dbtpal',
     }
 
 ```
-## 🙈 Usage
+## 🙈 Commmads
 
 dbtpal has sensible defaults and can auto-detect project directories based
 on the currently open buffer when first run.
 
-Log level can be set with `vim.g.dbtpal_log_level` (must be **before** `setup()`)
 
 Your typical dbt commands are supported in three modes: current model, all models,
 and user-specified models. See the sample setup above for some common mappings.
 
-```lua
+Commands can be either invoked as vim user-commands or through lua. Lua calls
+provide more flexibility if additional arguments are required, but user-commands
+work well if all you need is the default behavior, with a single model selector
+argument.
 
--- In Lua
-require('dbtpal').run()
-require('dbtpal').run_all()
-require('dbtpal').run_model('+my_second_dbt_model')
+#### DbtRun
 
-require('dbtpal').test()
-require('dbtpal').test_all()
-require('dbtpal').test_model('+my_second_dbt_model')
-
-require('dbtpal').compile()
-require('dbtpal').build()
+In Lua: `require('dbtpal').run()`
+Run the current model
 
 
-require('dbtpal').run_command('ls')
+#### DbtRunAll
 
-```
+In Lua: `require('dbtpal').run_all()`
+Run all models in the project
+
+#### DbtRunModel
+
+In Lua: `require('dbtpal').run_model('+my_second_dbt_model')`
+Run a specific model or selector. Requires a model selector argument.
+Example: `DbtRunModel +my_second_dbt_model`
+
+#### DbtTest
+
+In Lua: `require('dbtpal').test()`
+Test the current model
+
+#### DbtTestAll
+
+In Lua: `require('dbtpal').test_all()`
+Test all models in the project
+
+#### DbtTestModel
+
+In Lua: `require('dbtpal').test_model('+my_second_dbt_model')`
+Test a specific model or selector. Requires a model selector argument.
+Example: `DbtTestModel +my_second_dbt_model`
+
+#### DbtCompile
+
+In Lua: `require('dbtpal').compile()`
+Compile the current model
+
+#### DbtBuild
+
+In Lua: `require('dbtpal').build()`
+Build the current model
+
 
 ###  Configuration
 
-You can override default configuration options by passing a table to `setup({})`
+You can override default configuration options by passing a table to `setup({})`.
+See the Installation section for an example
 
 ```
 require("dbtpal").setup({ ... })
 ```
 
-The following settings are available. Override these in the setup function
-above.
+The following options are available:
 
-```lua
-global_settings = {
-    path_to_dbt = "dbt",
-    path_to_dbt_project = "", -- auto-detects by default
-    path_to_dbt_profiles_dir = "~/.dbt/",
-}
-```
+| Option                   | Description                                              | Default                            |
+| ------                   | -----------                                              | -------                            |
+| path_to_dbt              | Path to the dbt executable                               | `dbt` (i.e. dbt in the local path) |
+| path_to_dbt_project      | Path to the dbt project                                  | `""` (auto-detect)                 |
+| path_to_dbt_profiles_dir | Path to dbt profiles directory                           | `"~/.dbt"`                         |
+| extended_path_search     | Search for ref/source files in macros and models folders | `true`                             |
+| protect_compiled_files   | Prevent modifying sql files in target/(compiled|run) folders | `true`                    |
 
-### 📚Commands
 
-```lua
-local dbt = require("dbtpal")
+### Misc
 
-dbt.run() -- run the currently open file as a model
-dbt.run_model("my_model") -- run an arbitrary model
-dbt.run_model("+my_model tag:nightly") -- run an arbitrary model using selectors
-dbt.run_all()
-
-dbt.test()
-dbt.test_model("my_model")
-
-dbt.compile() -- compiles the model and opens a scratch buffer with the results
-dbt.compile_model("my_model")
-
-dbt.build() -- unlike run and test, this builds the entire project
-dbt.build_model("my_model") -- builds a specific model
-
-dbt.run_command("seed") -- runs an arbitrary dbt command
-```
+Log level can be set with `vim.g.dbtpal_log_level` (must be **before** `setup()`)

@@ -8,7 +8,7 @@ M.defaults = {
 
     custom_dbt_syntax_enabled = true,
     extended_path_search = true,
-    protect_compiled_target_files = true,
+    protect_compiled_files = true,
 
     pre_cmd_args = {
         "--use-colors",
@@ -18,7 +18,16 @@ M.defaults = {
 
 M.options = {}
 
-function M.setup(options) M.options = vim.tbl_deep_extend("force", M.defaults, options or {}) end
+function M.setup(options)
+    if options.path_to_dbt_project ~= "" then
+        options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
+    end
+    if options.path_to_dbt_profiles_dir ~= "" then
+        options.path_to_dbt_profiles_dir = vim.fn.expand(options.path_to_dbt_profiles_dir)
+    end
+
+    M.options = vim.tbl_deep_extend("force", M.defaults, options or {})
+end
 
 M.setup()
 
