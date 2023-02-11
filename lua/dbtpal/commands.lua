@@ -4,6 +4,7 @@ local config = require "dbtpal.config"
 local M = {}
 
 M.build_path_args = function(cmd, args)
+    log.trace("dbtpal config: " .. vim.inspect(config.options))
     local dbt_path = config.options.path_to_dbt
     local dbt_project = config.options.path_to_dbt_project
     local dbt_profile = config.options.path_to_dbt_profiles_dir

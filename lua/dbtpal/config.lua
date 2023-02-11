@@ -19,12 +19,13 @@ M.defaults = {
 M.options = {}
 
 function M.setup(options)
-    options = options or {}
-    if options.path_to_dbt_project ~= "" then
-        options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
-    end
-    if options.path_to_dbt_profiles_dir ~= "" then
-        options.path_to_dbt_profiles_dir = vim.fn.expand(options.path_to_dbt_profiles_dir)
+    if options ~= nil then
+        if options.path_to_dbt_project ~= "" then
+            options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
+        end
+        if options.path_to_dbt_profiles_dir ~= "" then
+            options.path_to_dbt_profiles_dir = vim.fn.expand(options.path_to_dbt_profiles_dir)
+        end
     end
 
     M.options = vim.tbl_deep_extend("force", M.defaults, options or {})
