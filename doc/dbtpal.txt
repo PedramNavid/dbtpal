@@ -7,7 +7,7 @@ Table of Contents                                   *dbtpal-table-of-contents*
 1. ✨Features                                            |dbtpal-✨features|
   - ⚡️ Requirements                           |dbtpal-⚡️-requirements|
   - ⚙ Installation                                 |dbtpal-⚙-installation|
-  - 🙈 Commmads                                       |dbtpal-🙈-commmads|
+  - 🙈 Commands                                       |dbtpal-🙈-commands|
 
 DBTPAL.NVIM                                               *dbtpal-dbtpal.nvim*
 
@@ -87,7 +87,7 @@ Install using your favorite plugin manager:
 <
 
 
-🙈 COMMMADS                                           *dbtpal-🙈-commmads*
+🙈 COMMANDS                                           *dbtpal-🙈-commands*
 
 dbtpal has sensible defaults and can auto-detect project directories based on
 the currently open buffer when first run.
