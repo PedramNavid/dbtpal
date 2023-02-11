@@ -19,6 +19,7 @@ M.defaults = {
 M.options = {}
 
 function M.setup(options)
+    options = options or {}
     if options.path_to_dbt_project ~= "" then
         options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
     end

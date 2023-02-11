@@ -7,7 +7,6 @@ local config = require "dbtpal.config"
 local commands = require "dbtpal.commands"
 local projects = require "dbtpal.projects"
 local log = require "dbtpal.log"
-local Path = require "plenary.path"
 local J = require "plenary.Job"
 
 local M = {}

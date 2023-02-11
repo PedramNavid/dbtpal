@@ -15,7 +15,8 @@ local _cmd_select_args = function(cmd, selector, args)
     end
 
     if type(selector) == "table" then
-        return M._create_job(cmd, vim.list_extend({ "--select", table.concat(selector, " ") }, args or {}))
+        return M._create_job(cmd,
+            vim.list_extend({ "--select", table.concat(selector, " ") }, args or {}))
     end
 end
 
@@ -49,7 +50,8 @@ M._create_job = function(cmd, args)
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
         if projects.detect_dbt_project_dir(bpath) == false then
-            log.warn "Could not detect dbt project dir, try setting it manually or make sure this file is in a dbt project folder"
+            log.warn("Could not detect dbt project dir, try setting it manually " ..
+                "log or make sure this file is in a dbt project folder")
             return
         end
     end
