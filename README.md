@@ -67,7 +67,7 @@ use {'pdrmnvd/dbtpal',
     }
 
 ```
-## 🙈 Commmads
+## 🙈 Commands
 
 dbtpal has sensible defaults and can auto-detect project directories based
 on the currently open buffer when first run.
