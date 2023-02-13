@@ -84,44 +84,54 @@ argument.
 #### DbtRun
 
 In Lua: `require('dbtpal').run()`
+
 Run the current model
 
 
 #### DbtRunAll
 
 In Lua: `require('dbtpal').run_all()`
+
 Run all models in the project
 
 #### DbtRunModel
 
 In Lua: `require('dbtpal').run_model('+my_second_dbt_model')`
+
 Run a specific model or selector. Requires a model selector argument.
+
 Example: `DbtRunModel +my_second_dbt_model`
 
 #### DbtTest
 
 In Lua: `require('dbtpal').test()`
+
 Test the current model
 
 #### DbtTestAll
 
 In Lua: `require('dbtpal').test_all()`
+
 Test all models in the project
 
 #### DbtTestModel
 
 In Lua: `require('dbtpal').test_model('+my_second_dbt_model')`
+
 Test a specific model or selector. Requires a model selector argument.
+
 Example: `DbtTestModel +my_second_dbt_model`
 
 #### DbtCompile
 
 In Lua: `require('dbtpal').compile()`
+
 Compile the current model
 
 #### DbtBuild
 
 In Lua: `require('dbtpal').build()`
+
 Build the current model
 
 
