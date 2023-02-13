@@ -1,4 +1,4 @@
-*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 11
+*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 13
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -103,59 +103,65 @@ model selector argument.
 
                                                                *dbtpal-DbtRun*
 
-DbtRun                                 In Lua: `require('dbtpal').run()` Run
-                                       the current model
+DbtRun                                 In Lua: `require('dbtpal').run()`
 
+
+Run the current model
 
                                                             *dbtpal-DbtRunAll*
 
 DbtRunAll                              In Lua: `require('dbtpal').run_all()`
-                                       Run all models in the project
 
+
+Run all models in the project
 
                                                           *dbtpal-DbtRunModel*
 
 DbtRunModel                            In Lua:
                                        `require('dbtpal').run_model('+my_second_dbt_model')`
-                                       Run a specific model or selector.
-                                       Requires a model selector argument.
-                                       Example: `DbtRunModel
-                                       +my_second_dbt_model`
 
+
+Run a specific model or selector. Requires a model selector argument.
+
+Example: `DbtRunModel +my_second_dbt_model`
 
                                                               *dbtpal-DbtTest*
 
-DbtTest                                In Lua: `require('dbtpal').test()` Test
-                                       the current model
+DbtTest                                In Lua: `require('dbtpal').test()`
 
+
+Test the current model
 
                                                            *dbtpal-DbtTestAll*
 
 DbtTestAll                             In Lua: `require('dbtpal').test_all()`
-                                       Test all models in the project
 
+
+Test all models in the project
 
                                                          *dbtpal-DbtTestModel*
 
 DbtTestModel                           In Lua:
                                        `require('dbtpal').test_model('+my_second_dbt_model')`
-                                       Test a specific model or selector.
-                                       Requires a model selector argument.
-                                       Example: `DbtTestModel
-                                       +my_second_dbt_model`
 
+
+Test a specific model or selector. Requires a model selector argument.
+
+Example: `DbtTestModel +my_second_dbt_model`
 
                                                            *dbtpal-DbtCompile*
 
 DbtCompile                             In Lua: `require('dbtpal').compile()`
-                                       Compile the current model
 
+
+Compile the current model
 
                                                              *dbtpal-DbtBuild*
 
 DbtBuild                               In Lua: `require('dbtpal').build()`
-                                       Build the current model
 
+
+Build the current model
 
  CONFIGURATION ~
 
