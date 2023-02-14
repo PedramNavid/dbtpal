@@ -65,9 +65,11 @@ M._create_job = function(cmd, args)
         args = cmd_args,
         on_exit = function(j, code)
             if code ~= 0 then
-                log.fmt_error("Exit Code: %s. Stderr=%s", code, vim.inspect(j:stderr_result()))
-                table.insert(response, "Failed to run dbt command. Exit Code: " .. code)
-                vim.list_extend(response, j:stderr_result())
+                table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
+                local a = table.concat(cmd_args, " ") or ""
+                local err = string.format("dbt command %s failed.\n\n", a)
+                table.insert(response, err)
+                vim.list_extend(response, j:result())
             else
                 response = j:result()
             end

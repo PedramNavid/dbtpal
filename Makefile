@@ -16,4 +16,4 @@ lint:
 	@echo "Linting..."
 	luacheck ./lua
 
-pr-ready: fmt test lint
+check: fmt test lint
