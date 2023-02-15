@@ -1,4 +1,4 @@
-*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 14
+*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 15
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -162,6 +162,17 @@ DbtBuild                               In Lua: `require('dbtpal').build()`
 
 
 Build the current model
+
+ADDITIONAL LUA ONLY FUNCTIONS ~
+
+These commands are only available as Lua-only commands. You can map them to
+specific key-bindings if you wish.
+
+`require('dbtpal').run_children()`: equivalent to `dbt run -s model+`
+
+`require('dbtpal').run_parents()`: equivalent to `dbt run -s +model`
+
+`require('dbtpal').run_family()`: equivalent to `dbt run -s +model+`
 
  CONFIGURATION ~
 
