@@ -135,6 +135,17 @@ In Lua: `require('dbtpal').build()`
 Build the current model
 
 
+### Additional Lua Only Functions
+
+These commands are only available as Lua-only commands. You can map them to
+specific key-bindings if you wish.
+
+`require('dbtpal').run_children()`: equivalent to `dbt run -s model+`
+
+`require('dbtpal').run_parents()`: equivalent to `dbt run -s +model`
+
+`require('dbtpal').run_family()`: equivalent to `dbt run -s +model+`
+
 ###  Configuration
 
 You can override default configuration options by passing a table to `setup({})`.

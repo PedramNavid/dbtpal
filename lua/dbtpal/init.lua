@@ -15,6 +15,9 @@ M.config = config
 M.run = main.run
 M.run_all = main.run_all
 M.run_model = main.run_model
+M.run_children = main.run_children
+M.run_parents = main.run_parents
+M.run_family = main.run_family
 
 M.test = main.test
 M.test_all = main.test_all

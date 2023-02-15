@@ -33,6 +33,10 @@ M.run_model = function(selector, args) return _run(selector, args) end
 
 M.run = function() return _run(vim.fn.expand "%:t:r") end
 
+M.run_children = function() return _run(vim.fn.expand "%:t:r" .. "+") end
+M.run_parents = function() return _run("+" .. vim.fn.expand "%:t:r") end
+M.run_family = function() return _run("+" .. vim.fn.expand "%:t:r" .. "+") end
+
 M.test_all = function(args) return _test(nil, args) end
 
 M.test_model = function(selector, args) return _test(selector, args) end
@@ -64,7 +68,10 @@ M._create_job = function(cmd, args)
         command = dbt_path,
         args = cmd_args,
         on_exit = function(j, code)
-            if code ~= 0 then
+            if code == 1 then
+                vim.list_extend(response, j:result())
+                log.warn "dbt command encounted a handled error, see popup for details"
+            elseif code >= 2 then
                 table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
                 local a = table.concat(cmd_args, " ") or ""
                 local err = string.format("dbt command %s failed.\n\n", a)
