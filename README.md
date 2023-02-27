@@ -31,7 +31,7 @@ Install using your favorite plugin manager:
 
 ```lua
 
-use {'pdrmnvd/dbtpal',
+use {'PedramNavid/dbtpal',
     config = function()
         local dbt = require('dbtpal')
         dbt.setup {
@@ -61,7 +61,7 @@ use {'pdrmnvd/dbtpal',
         vim.keymap.set('n', '<leader>dm', require('dbtpal.telescope').dbt_picker)
 
         -- Enable Telescope Extension
-        require'telescope'.load_extension('dbt_pal')
+        require'telescope'.load_extension('dbtpal')
         end,
     requires = { { 'nvim-lua/plenary.nvim' }, {'nvim-telescope/telescope.nvim'} }
     }
