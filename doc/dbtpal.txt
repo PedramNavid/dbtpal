@@ -1,22 +1,18 @@
-*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 15
+*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 February 27
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
 
   - dbtpal.nvim                                           |dbtpal-dbtpal.nvim|
 1. ✨Features                                            |dbtpal-✨features|
-  - ⚡️ Requirements                           |dbtpal-⚡️-requirements|
-  - ⚙ Installation                                 |dbtpal-⚙-installation|
-  - 🙈 Commands                                       |dbtpal-🙈-commands|
+  - ⚡️ Requirements               |dbtpal-✨features-⚡️-requirements|
+  - ⚙ Installation                     |dbtpal-✨features-⚙-installation|
+  - 🙈 Commands                           |dbtpal-✨features-🙈-commands|
 
 DBTPAL.NVIM                                               *dbtpal-dbtpal.nvim*
 
-<div class="figure">
-<img src="https://raw.githubusercontent.com/PedramNavid/dbtpal/main/assets/dbt%20model%20run.gif" title="fig:"/>
-<p class="caption">image</p>
-</div>
-
 A Neovim plugin for dbt model editing. The little helper I wish I always had.
+
 
 ==============================================================================
 1. ✨Features                                            *dbtpal-✨features*
@@ -30,11 +26,11 @@ A Neovim plugin for dbt model editing. The little helper I wish I always had.
 - Telescope Extension to fuzzy-find models
 - Automatically detect dbt project folder
 
-
 I do welcome requests and use-cases, so feel free to reach out on Twitter
-(pdrmnv <https://twitter.com/pdrmnvd>) or by creating an issue.
+(@pdrmnvd <https://twitter.com/pdrmnvd>) or by creating an issue.
 
-⚡️ REQUIREMENTS                               *dbtpal-⚡️-requirements*
+
+⚡️ REQUIREMENTS                   *dbtpal-✨features-⚡️-requirements*
 
 
 - Neovim >=0.5.0
@@ -42,15 +38,15 @@ I do welcome requests and use-cases, so feel free to reach out on Twitter
 - plenary.nvim <https://github.com/nvim-lua/plenary.nvim>
 
 
-⚙ INSTALLATION                                     *dbtpal-⚙-installation*
+⚙ INSTALLATION                         *dbtpal-✨features-⚙-installation*
 
 Install using your favorite plugin manager:
 
 **Using Packer**
 
->
+>lua
     
-    use {'pdrmnvd/dbtpal',
+    use {'PedramNavid/dbtpal',
         config = function()
             local dbt = require('dbtpal')
             dbt.setup {
@@ -80,14 +76,14 @@ Install using your favorite plugin manager:
             vim.keymap.set('n', '<leader>dm', require('dbtpal.telescope').dbt_picker)
     
             -- Enable Telescope Extension
-            require'telescope'.load_extension('dbt_pal')
+            require'telescope'.load_extension('dbtpal')
             end,
         requires = { { 'nvim-lua/plenary.nvim' }, {'nvim-telescope/telescope.nvim'} }
         }
 <
 
 
-🙈 COMMANDS                                           *dbtpal-🙈-commands*
+🙈 COMMANDS                               *dbtpal-✨features-🙈-commands*
 
 dbtpal has sensible defaults and can auto-detect project directories based on
 the currently open buffer when first run.
@@ -101,67 +97,66 @@ provide more flexibility if additional arguments are required, but
 user-commands work well if all you need is the default behavior, with a single
 model selector argument.
 
-                                                               *dbtpal-DbtRun*
 
-DbtRun                                 In Lua: `require('dbtpal').run()`
+DBTRUN
 
+In Lua: `require('dbtpal').run()`
 
 Run the current model
 
-                                                            *dbtpal-DbtRunAll*
 
-DbtRunAll                              In Lua: `require('dbtpal').run_all()`
+DBTRUNALL
 
+In Lua: `require('dbtpal').run_all()`
 
 Run all models in the project
 
-                                                          *dbtpal-DbtRunModel*
 
-DbtRunModel                            In Lua:
-                                       `require('dbtpal').run_model('+my_second_dbt_model')`
+DBTRUNMODEL
 
+In Lua: `require('dbtpal').run_model('+my_second_dbt_model')`
 
 Run a specific model or selector. Requires a model selector argument.
 
 Example: `DbtRunModel +my_second_dbt_model`
 
-                                                              *dbtpal-DbtTest*
 
-DbtTest                                In Lua: `require('dbtpal').test()`
+DBTTEST
 
+In Lua: `require('dbtpal').test()`
 
 Test the current model
 
-                                                           *dbtpal-DbtTestAll*
 
-DbtTestAll                             In Lua: `require('dbtpal').test_all()`
+DBTTESTALL
 
+In Lua: `require('dbtpal').test_all()`
 
 Test all models in the project
 
-                                                         *dbtpal-DbtTestModel*
 
-DbtTestModel                           In Lua:
-                                       `require('dbtpal').test_model('+my_second_dbt_model')`
+DBTTESTMODEL
 
+In Lua: `require('dbtpal').test_model('+my_second_dbt_model')`
 
 Test a specific model or selector. Requires a model selector argument.
 
 Example: `DbtTestModel +my_second_dbt_model`
 
-                                                           *dbtpal-DbtCompile*
 
-DbtCompile                             In Lua: `require('dbtpal').compile()`
+DBTCOMPILE
 
+In Lua: `require('dbtpal').compile()`
 
 Compile the current model
 
-                                                             *dbtpal-DbtBuild*
 
-DbtBuild                               In Lua: `require('dbtpal').build()`
+DBTBUILD
 
+In Lua: `require('dbtpal').build()`
 
 Build the current model
+
 
 ADDITIONAL LUA ONLY FUNCTIONS ~
 
@@ -174,6 +169,7 @@ specific key-bindings if you wish.
 
 `require('dbtpal').run_family()`: equivalent to `dbt run -s +model+`
 
+
  CONFIGURATION ~
 
 You can override default configuration options by passing a table to
@@ -183,21 +179,35 @@ You can override default configuration options by passing a table to
     require("dbtpal").setup({ ... })
 <
 
-
 The following options are available:
 
-│         Option         │                      Description                       │               Default               │
-│path_to_dbt             │Path to the dbt executable                              │dbt (i.e. dbt in the local path)    │
-│path_to_dbt_project     │Path to the dbt project                                 │"" (auto-detect)                     │
-│path_to_dbt_profiles_dir│Path to dbt profiles directory                          │"~/.dbt"                             │
-│extended_path_search    │Search for ref/source files in macros and models folders│true                                 │
-│protect_compiled_files  │Prevent modifying sql files in target/(compiled         │run) folders                         │
+  --------------------------------------------------------------------------------
+  Option                     Description                      Default
+  -------------------------- -------------------------------- --------------------
+  path_to_dbt                Path to the dbt executable       dbt (i.e. dbt in the
+                                                              local path)
 
+  path_to_dbt_project        Path to the dbt project          "" (auto-detect)
+
+  path_to_dbt_profiles_dir   Path to dbt profiles directory   "~/.dbt"
+
+  extended_path_search       Search for ref/source files in   true
+                             macros and models folders        
+
+  protect_compiled_files     Prevent modifying sql files in   run) folders
+                             target/(compiled                 
+  --------------------------------------------------------------------------------
 
 MISC ~
 
 Log level can be set with `vim.g.dbtpal_log_level` (must be **before**
 `setup()`)
+
+==============================================================================
+2. Links                                                        *dbtpal-links*
+
+1. *image*: https://raw.githubusercontent.com/PedramNavid/dbtpal/main/assets/dbt%20model%20run.gif
+2. *@pdrmnvd*: 
 
 Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
 
