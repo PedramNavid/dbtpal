@@ -61,7 +61,7 @@ M._create_job = function(cmd, args)
         end
     end
 
-    local onexit = function(data) display.popup("dbt " .. cmd, data) end
+    local onexit = function(data) display.popup(data) end
     local dbt_path, cmd_args = commands.build_path_args(cmd, args)
     local response = {}
     local job = J:new {

@@ -1,6 +1,6 @@
 local M = {}
 
-local function popup(title, data, opts)
+local function popup(data, opts)
     local name = "dbtpalConsole"
     local cur = vim.fn.bufnr(name)
 
@@ -22,7 +22,6 @@ local function popup(title, data, opts)
         height = height,
         col = left,
         row = top,
-        title = title or "Job Results",
     }, opts or {})
 
     local buf = vim.api.nvim_create_buf(false, true)
