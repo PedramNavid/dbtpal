@@ -13,6 +13,7 @@ M.defaults = {
     pre_cmd_args = {
         "--use-colors",
         "--printer-width=10",
+        "--quiet",
     },
 }
 
