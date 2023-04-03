@@ -74,7 +74,8 @@ M._create_job = function(cmd, args)
             elseif code >= 2 then
                 table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
                 local a = table.concat(cmd_args, " ") or ""
-                local err = string.format("dbt command %s failed.\n\n", a)
+                local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
+                table.insert(response, "------------\n")
                 table.insert(response, err)
                 vim.list_extend(response, j:result())
             else

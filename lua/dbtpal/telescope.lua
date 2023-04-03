@@ -8,10 +8,11 @@ local commands = require "dbtpal.commands"
 local projects = require "dbtpal.projects"
 local log = require "dbtpal.log"
 local J = require "plenary.Job"
+local display = require "dbtpal.display"
 
 local M = {}
 
-local dbt_models = function(tbl, opts)
+M.dbt_models = function(tbl, opts)
     opts = opts or themes.get_dropdown {}
 
     pickers
@@ -59,9 +60,18 @@ M.dbt_picker = function(opts)
             command = dbt_path,
             args = cmd_args,
             on_exit = function(j, code)
-                if code ~= 0 then log.fmt_error("Exit Code: %s. Stderr=%s", code, vim.inspect(j:stderr_result())) end
-                response = j:result()
-                vim.schedule(function() dbt_models(response, opts) end)
+                if code == 0 then
+                    response = j:result()
+                    vim.schedule(function() M.dbt_models(response, opts) end)
+                else
+                    table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
+                    local a = table.concat(cmd_args, " ") or ""
+                    local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
+                    table.insert(response, "------------\n")
+                    table.insert(response, err)
+                    vim.list_extend(response, j:result())
+                    vim.schedule(function() display.popup(response) end)
+                end
             end,
         })
         :start()
