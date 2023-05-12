@@ -1,4 +1,4 @@
-*dbtpal.txt*              For NVIM v0.8.0             Last change: 2023 May 01
+*dbtpal.txt*              For NVIM v0.8.0             Last change: 2023 May 12
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -17,7 +17,6 @@ A Neovim plugin for dbt model editing. The little helper I wish I always had.
 ==============================================================================
 1. ✨Features                                            *dbtpal-✨features*
 
-
 - Run / test open model, the entire project, or arbitrary selectors
 - Async jobs with pop-up command outputs
 - Custom dbt filetype with better syntax highlighting
@@ -31,7 +30,6 @@ I do welcome requests and use-cases, so feel free to reach out on Twitter
 
 
 ⚡️ REQUIREMENTS                   *dbtpal-✨features-⚡️-requirements*
-
 
 - Neovim >=0.5.0
 - dbt <https://docs.getdbt.com/dbt-cli/installation> >=1.0.0
