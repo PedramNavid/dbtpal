@@ -3,6 +3,13 @@ local config = require "dbtpal.config"
 
 local M = {}
 
+local get_dbt_version = function()
+  local cmd = vim.fn.systemlist("dbt --version | grep -Po '(?<=installed: )\\d+\\.\\d+'")
+  local version = cmd[1]
+  log.debug("dbt version: " .. version)
+  return version
+end
+
 M.build_path_args = function(cmd, args)
     log.trace("dbtpal config: " .. vim.inspect(config.options))
     local dbt_path = config.options.path_to_dbt
@@ -13,6 +20,10 @@ M.build_path_args = function(cmd, args)
 
     -- TODO: make this configurable
     local pre_cmd_args = config.options.pre_cmd_args or {}
+
+    if tonumber(get_dbt_version()) >= 1.5 then
+      vim.list_extend(pre_cmd_args, { "--log-level=NONE" })
+    end
 
     local post_cmd_args = {
         "--profiles-dir",

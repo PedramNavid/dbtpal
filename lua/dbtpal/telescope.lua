@@ -62,6 +62,7 @@ M.dbt_picker = function(opts)
             on_exit = function(j, code)
                 if code == 0 then
                     response = j:result()
+                    log.debug(response)
                     vim.schedule(function() M.dbt_models(response, opts) end)
                 else
                     table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
@@ -69,6 +70,7 @@ M.dbt_picker = function(opts)
                     local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
                     table.insert(response, "------------\n")
                     table.insert(response, err)
+                    vim.list_extend(response, j:stderr_result())
                     vim.list_extend(response, j:result())
                     vim.schedule(function() display.popup(response) end)
                 end

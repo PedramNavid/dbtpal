@@ -11,9 +11,12 @@ M.defaults = {
     protect_compiled_files = true,
 
     pre_cmd_args = {
-        "--use-colors",
         "--printer-width=10",
     },
+
+    env = {
+      ['DBT_LOG_LEVEL'] = 'NONE'
+    }
 }
 
 M.options = {}
