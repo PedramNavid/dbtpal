@@ -2,3 +2,4 @@
 db
 .luarc.json
 *.log
+doc/tags

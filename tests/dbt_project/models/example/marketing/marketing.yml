@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: marketing_a
+  - name: marketing_b

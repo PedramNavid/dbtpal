@@ -55,7 +55,7 @@ M._create_job = function(cmd, args)
         if projects.detect_dbt_project_dir(bpath) == false then
             log.warn(
                 "Could not detect dbt project dir, try setting it manually "
-                    .. "log or make sure this file is in a dbt project folder"
+                    .. "or make sure this file is in a dbt project folder"
             )
             return
         end
@@ -77,7 +77,9 @@ M._create_job = function(cmd, args)
                 local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
                 table.insert(response, "------------\n")
                 table.insert(response, err)
+                log.debug(j)
                 vim.list_extend(response, j:result())
+                vim.list_extend(response, j:stderr_result())
             else
                 response = j:result()
             end
