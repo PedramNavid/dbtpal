@@ -8,11 +8,13 @@ local _find_project_dir = function(fpath)
     log.trace("Searching for dbt project dir in " .. fpath)
     local path = vim.fn.expand(vim.fn.fnamemodify(fpath, ":p"))
     local dbt_project = vim.fn.findfile("dbt_project.yml", path .. ";")
-    if dbt_project == "" then
+    if dbt_project == "" or dbt_project == "v:null" then
         log.trace("No dbt project found in " .. path)
         return nil
     end
-    return vim.fn.fnamemodify(dbt_project, ":p:h")
+    local found_path = vim.fn.fnamemodify(dbt_project, ":p:h")
+    log.trace("dbt project found in " .. found_path)
+    return found_path
 end
 
 M.detect_dbt_project_dir = function(bpath)
