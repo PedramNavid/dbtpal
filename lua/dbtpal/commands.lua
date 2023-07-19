@@ -4,10 +4,10 @@ local config = require "dbtpal.config"
 local M = {}
 
 local get_dbt_version = function()
-  local cmd = vim.fn.systemlist("dbt --version | grep -Eo '[0-9]+\\.[0-9]+' | head -n 1")
-  local version = cmd[1]
-  log.debug("dbt version: " .. version)
-  return tonumber(version)
+    local cmd = vim.fn.systemlist "dbt --version | grep -Eo '[0-9]+\\.[0-9]+' | head -n 1"
+    local version = cmd[1]
+    log.debug("dbt version: " .. version)
+    return tonumber(version)
 end
 
 M.build_path_args = function(cmd, args)
@@ -22,7 +22,7 @@ M.build_path_args = function(cmd, args)
     local pre_cmd_args = config.options.pre_cmd_args or {}
 
     if get_dbt_version() ~= nil and get_dbt_version() >= 1.5 then
-      vim.list_extend(pre_cmd_args, { "--log-level=INFO" })
+        vim.list_extend(pre_cmd_args, { "--log-level=INFO" })
     end
 
     local post_cmd_args = {

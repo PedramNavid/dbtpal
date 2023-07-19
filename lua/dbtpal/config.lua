@@ -15,8 +15,8 @@ M.defaults = {
     },
 
     env = {
-      ['DBT_LOG_LEVEL'] = 'NONE'
-    }
+        ["DBT_LOG_LEVEL"] = "NONE",
+    },
 }
 
 M.options = {}
