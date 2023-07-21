@@ -1,4 +1,4 @@
-*dbtpal.txt*             For NVIM v0.8.0             Last change: 2023 July 19
+*dbtpal.txt*             For NVIM v0.8.0             Last change: 2023 July 21
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -199,7 +199,7 @@ The following options are available:
 MISC ~
 
 Log level can be set with `vim.g.dbtpal_log_level` (must be **before**
-`setup()`)
+`setup()`) or on the command line: `DBTPAL_LOG_LEVEL=info nvim myfile.sql`
 
 ==============================================================================
 2. Links                                                        *dbtpal-links*
