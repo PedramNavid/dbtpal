@@ -6,7 +6,6 @@ local config = require "dbtpal.config"
 local log = require "dbtpal.log"
 require "dbtpal.files"
 
-log.trace "dbtpal initialized"
 local M = {}
 
 M.setup = config.setup

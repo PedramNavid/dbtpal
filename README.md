@@ -169,3 +169,4 @@ The following options are available:
 ### Misc
 
 Log level can be set with `vim.g.dbtpal_log_level` (must be **before** `setup()`)
+or on the command line: `DBTPAL_LOG_LEVEL=info nvim myfile.sql`

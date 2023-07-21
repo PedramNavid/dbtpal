@@ -8,7 +8,7 @@ local display = require "dbtpal.display"
 local M = {}
 
 local _cmd_select_args = function(cmd, selector, args)
-    if not selector then return M._create_job(cmd, args) end
+    if selector == nil then return M._create_job(cmd, args) end
 
     if type(selector) == "string" then
         return M._create_job(cmd, vim.list_extend({ "--select", selector }, args or {}))
@@ -50,6 +50,7 @@ M.build = function(selector, args) return _build(selector, args) end
 M.run_command = function(cmd, args) return _cmd_select_args(cmd, args) end
 
 M._create_job = function(cmd, args)
+    log.info("dbt " .. cmd .. " queued")
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
         if projects.detect_dbt_project_dir(bpath) == false then
@@ -62,6 +63,7 @@ M._create_job = function(cmd, args)
     end
 
     local onexit = function(data) display.popup(data) end
+    if args == "" then args = nil end
     local dbt_path, cmd_args = commands.build_path_args(cmd, args)
     local response = {}
     local job = J:new {

@@ -25,7 +25,6 @@ M.dbt_models = function(tbl, opts)
                     local res = vim.fn.json_decode(entry)
 
                     if res == nil then return {} end
-                    log.fmt_trace("Value: %s. Display: %s. Path: %s", res.unique_id, res.name, res.original_file_path)
 
                     return {
                         value = res.unique_id,

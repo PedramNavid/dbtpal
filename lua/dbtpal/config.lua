@@ -22,8 +22,8 @@ M.defaults = {
 M.options = {}
 
 function M.setup(options)
-    log.trace("dbtpal initial setup with supplied config: " .. vim.inspect(options))
     if options ~= nil then
+        log.debug("dbtpal initial setup with supplied config: " .. vim.inspect(options))
         if options.path_to_dbt_project ~= "" then
             options.path_to_dbt_project = vim.fn.expand(options.path_to_dbt_project)
         end
@@ -36,7 +36,5 @@ function M.setup(options)
 end
 
 M.setup()
-
-log.trace(M.options)
 
 return M
