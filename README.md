@@ -163,7 +163,7 @@ The following options are available:
 | path_to_dbt_project      | Path to the dbt project                                  | `""` (auto-detect)                 |
 | path_to_dbt_profiles_dir | Path to dbt profiles directory                           | `"~/.dbt"`                         |
 | extended_path_search     | Search for ref/source files in macros and models folders | `true`                             |
-| protect_compiled_files   | Prevent modifying sql files in target/(compiled|run) folders | `true`                    |
+| protect_compiled_files   | Prevent modifying sql files in target/(compiled\|run) folders | `true`                    |
 
 
 ### Misc
