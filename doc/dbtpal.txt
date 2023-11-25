@@ -1,4 +1,4 @@
-*dbtpal.txt*             For NVIM v0.8.0             Last change: 2023 July 21
+*dbtpal.txt*           For NVIM v0.8.0           Last change: 2023 November 25
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -192,8 +192,8 @@ The following options are available:
   extended_path_search       Search for ref/source files in   true
                              macros and models folders        
 
-  protect_compiled_files     Prevent modifying sql files in   run) folders
-                             target/(compiled                 
+  protect_compiled_files     Prevent modifying sql files in   true
+                             target/(compiled|run) folders    
   --------------------------------------------------------------------------------
 
 MISC ~
