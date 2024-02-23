@@ -30,43 +30,76 @@ Install using your favorite plugin manager:
 **Using Packer**
 
 ```lua
-
-use {'PedramNavid/dbtpal',
+use {
+    "PedramNavid/dbtpal",
     config = function()
-        local dbt = require('dbtpal')
-        dbt.setup {
-          -- Path to the dbt executable
-          path_to_dbt = "dbt",
+        local dbt = require("dbtpal")
+        dbt.setup({
+            -- Path to the dbt executable
+            path_to_dbt = "dbt",
 
-          -- Path to the dbt project, if blank, will auto-detect
-          -- using currently open buffer for all sql,yml, and md files
-          path_to_dbt_project = "",
+            -- Path to the dbt project, if blank, will auto-detect
+            -- using currently open buffer for all sql,yml, and md files
+            path_to_dbt_project = "",
 
-          -- Path to dbt profiles directory
-          path_to_dbt_profiles_dir = vim.fn.expand "~/.dbt",
+            -- Path to dbt profiles directory
+            path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
 
-          -- Search for ref/source files in macros and models folders
-          extended_path_search = true,
+            -- Search for ref/source files in macros and models folders
+            extended_path_search = true,
 
-          -- Prevent modifying sql files in target/(compiled|run) folders
-          protect_compiled_files = true
-
-        }
+            -- Prevent modifying sql files in target/(compiled|run) folders
+            protect_compiled_files = true,
+        })
 
         -- Setup key mappings
 
-        vim.keymap.set('n', '<leader>drf', dbt.run)
-        vim.keymap.set('n', '<leader>drp', dbt.run_all)
-        vim.keymap.set('n', '<leader>dtf', dbt.test)
-        vim.keymap.set('n', '<leader>dm', require('dbtpal.telescope').dbt_picker)
+        vim.keymap.set("n", "<leader>drf", dbt.run)
+        vim.keymap.set("n", "<leader>drp", dbt.run_all)
+        vim.keymap.set("n", "<leader>dtf", dbt.test)
+        vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
 
         -- Enable Telescope Extension
-        require'telescope'.load_extension('dbtpal')
-        end,
-    requires = { { 'nvim-lua/plenary.nvim' }, {'nvim-telescope/telescope.nvim'} }
-    }
-
+        require("telescope").load_extension("dbtpal")
+    end,
+    requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" } },
+}
 ```
+
+**Using lazy.nvim**
+
+<details>
+<summary>Show configuration...</summary>
+
+```lua
+{
+    "PedramNavid/dbtpal",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+        local dbt = require("dbtpal")
+
+        dbt.setup({
+            path_to_dbt = "dbt",
+            path_to_dbt_project = "",
+            path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+            extended_path_search = true,
+            protect_compiled_files = true,
+        })
+
+        vim.keymap.set("n", "<leader>drf", dbt.run)
+        vim.keymap.set("n", "<leader>drp", dbt.run_all)
+        vim.keymap.set("n", "<leader>dtf", dbt.test)
+        vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
+
+        require("telescope").load_extension("dbtpal")
+    end,
+}
+```
+</details>
+
 ## 🙈 Commands
 
 dbtpal has sensible defaults and can auto-detect project directories based
