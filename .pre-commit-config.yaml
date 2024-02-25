@@ -1,9 +1,9 @@
 repos:
   - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.16.1
+    rev: v0.20.0
     hooks:
       - id: stylua-github
   - repo: https://github.com/lunarmodules/luacheck
-    rev: v1.1.0
+    rev: v1.1.2
     hooks:
       - id: luacheck
