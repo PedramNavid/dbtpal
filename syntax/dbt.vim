@@ -1,16 +1,17 @@
 " dbt jinja + SQL syntax file
 " Language: dbt Jinja SQL
 " Maintainer: Pedram Navid <pedram@pedramnavid.com>
-" Last Change: Jan 28, 2023
+" Last Change: Feb 25, 2024
 
 if exists("b:current_syntax")
-   finish
+    finish
 endif
 
 " Import default SQL syntax
 runtime! syntax/sql.vim
 
 syntax case ignore
+
 
 " Borrowed from lepture/vim-jinja, these are jinja specific
 " keywords that are matched withi jinja regions {{ .. }} and
@@ -70,8 +71,8 @@ hi def link jinjaComBlock Comment
 " dbt_utils.foo(..)
 syn keyword dbtJinjaFunction    ref source config var   containedin=dbtJinjaTemplate
 syn match   dbtJinjaFunction    "\v\S+\ze\(\_.{-}\)"      containedin=dbtJinjaTemplate
-syn region  dbtJinjaString      matchgroup=Quote start=+"+ end=+"+ skipwhite containedin=dbtJinjaTemplate
-syn region  dbtJinjaString      matchgroup=Quote start=+'+ end=+'+ skipwhite containedin=dbtJinjaTemplate
+syn region  dbtJinjaString      matchgroup=Quote start=+"+ end=+"+ skipwhite keepend containedin=dbtJinjaTemplate
+syn region  dbtJinjaString      matchgroup=Quote start=+'+ end=+'+ skipwhite keepend containedin=dbtJinjaTemplate
 syn match   dbtJinjaOperator    "{{\|}}\|{%\|%}"
 
 hi link     dbtJinjaOperator    Operator
@@ -80,8 +81,8 @@ hi link     dbtJinjaString      String
 
 syn cluster dbtJinja           contains=dbtJinjaOperator,dbtJinjaFunction,dbtJinjaString
 
-syn region  dbtJinjaTemplate   start=+{%+ end=+%}+ contains=@dbtJinja,jinjaStatement,jinjaFilter keepend transparent
-syn region  dbtJinjaTemplate   start=+{{+ end=+}}+ contains=@dbtJinja,jinjaStatement,jinjaFilter keepend transparent
+syn region  dbtJinjaTemplate   start=+{%+ end=+%}+ contains=@dbtJinja,jinjaStatement,jinjaFilter,dbtJinjaTemplate transparent 
+syn region  dbtJinjaTemplate   start=+{{+ end=+}}+ contains=@dbtJinja,jinjaStatement,jinjaFilter,dbtJinjaTemplate transparent
 
 " CTE name, attempts to match xxx in > xxx as ( ... )
 syn match   dbtJinjaKeyword     "\v\S+\ze\s+as\s+\(\_.{-}\)"
