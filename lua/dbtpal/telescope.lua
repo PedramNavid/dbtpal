@@ -42,7 +42,7 @@ end
 
 M.dbt_picker = function(opts)
     local cmd = "ls"
-    local args = { "--resource-type=model", "--output=json" }
+    local args = { "--resource-type=model", "--output=json", "--quiet" }
 
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
