@@ -42,7 +42,7 @@ end
 
 M.dbt_picker = function(opts)
     local cmd = "ls"
-    local args = { "--resource-type=model", "--output=json" }
+    local args = { "--resource-type=model", "--output=json", "--quiet" }
 
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
@@ -61,7 +61,7 @@ M.dbt_picker = function(opts)
             on_exit = function(j, code)
                 if code == 0 then
                     response = j:result()
-                    log.debug(response)
+                    log.trace(response)
                     vim.schedule(function() M.dbt_models(response, opts) end)
                 else
                     table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
