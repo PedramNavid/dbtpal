@@ -32,9 +32,8 @@ function M.setup(options)
         end
     end
 
+
     M.options = vim.tbl_deep_extend("force", M.defaults, options or {})
 end
-
-M.setup()
 
 return M

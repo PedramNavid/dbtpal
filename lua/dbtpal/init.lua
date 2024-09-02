@@ -3,12 +3,11 @@ define here the lua functions that activate the plugin ]]
 
 local main = require "dbtpal.main"
 local config = require "dbtpal.config"
-require "dbtpal.files"
 
 local M = {}
 
-M.setup = config.setup
 M.config = config
+M.setup = config.setup
 
 M.run = main.run
 M.run_all = main.run_all
