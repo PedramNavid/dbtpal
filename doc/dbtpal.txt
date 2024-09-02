@@ -4,6 +4,7 @@
 Table of Contents                                   *dbtpal-table-of-contents*
 
   - dbtpal.nvim                                           |dbtpal-dbtpal.nvim|
+  - Maintenance Note!                               |dbtpal-maintenance-note!|
 1. ✨Features                                            |dbtpal-✨features|
   - ⚡️ Requirements               |dbtpal-✨features-⚡️-requirements|
   - ⚙ Installation                     |dbtpal-✨features-⚙-installation|
@@ -13,6 +14,12 @@ Table of Contents                                   *dbtpal-table-of-contents*
 DBTPAL.NVIM                                               *dbtpal-dbtpal.nvim*
 
 A Neovim plugin for dbt model editing. The little helper I wish I always had.
+
+
+MAINTENANCE NOTE!                                   *dbtpal-maintenance-note!*
+
+I don’t use dbt day-to-day so I don’t spend much time on this package.
+However, I do still accept issues and PRs, so please continue to send them in.
 
 
 ==============================================================================
