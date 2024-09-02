@@ -3,15 +3,27 @@
 
 local projects = require "dbtpal.projects"
 local config = require "dbtpal.config"
-
 vim.api.nvim_create_augroup("dbtPal", {})
+
 
 if config.options.custom_dbt_syntax_enabled then
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
         group = "dbtPal",
         pattern = { "*.sql" },
-        command = "set filetype=dbt syntax=dbt",
-        desc = "Enable custom dbt syntax",
+        callback = function()
+            vim.bo.filetype = "sql"
+            vim.cmd("runtime syntax/dbt.vim")
+        end,
+        desc = "Enable custom dbt syntax on top of SQL",
+    })
+else
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        group = "dbtPal",
+        pattern = { "*.sql" },
+        callback = function()
+            vim.bo.filetype = "sql"
+        end,
+        desc = "Set filetype to SQL without custom dbt syntax",
     })
 end
 
