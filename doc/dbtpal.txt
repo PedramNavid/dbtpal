@@ -1,4 +1,4 @@
-*dbtpal.txt*           For NVIM v0.8.0           Last change: 2024 February 25
+*dbtpal.txt*           For NVIM v0.8.0          Last change: 2024 September 02
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
@@ -8,6 +8,7 @@ Table of Contents                                   *dbtpal-table-of-contents*
   - ⚡️ Requirements               |dbtpal-✨features-⚡️-requirements|
   - ⚙ Installation                     |dbtpal-✨features-⚙-installation|
   - 🙈 Commands                           |dbtpal-✨features-🙈-commands|
+2. Links                                                        |dbtpal-links|
 
 DBTPAL.NVIM                                               *dbtpal-dbtpal.nvim*
 
