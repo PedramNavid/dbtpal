@@ -4,6 +4,12 @@
 
 A Neovim plugin for dbt model editing. The little helper I wish I always had.
 
+## Maintenance Note!
+
+I don't use dbt day-to-day so I don't spend much time on this package. 
+However, I do still accept issues and PRs, so please continue to send them in. 
+
+
 # ✨Features
 
 - Run / test open model, the entire project, or arbitrary selectors
