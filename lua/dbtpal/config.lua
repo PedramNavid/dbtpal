@@ -33,6 +33,7 @@ function M.setup(options)
     end
 
     M.options = vim.tbl_deep_extend("force", M.defaults, options or {})
+    require "dbtpal.files"
 end
 
 return M
