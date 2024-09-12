@@ -1,4 +1,4 @@
-*dbtpal.txt*           For NVIM v0.8.0          Last change: 2024 September 02
+*dbtpal.txt*           For NVIM v0.8.0          Last change: 2024 September 12
 
 ==============================================================================
 Table of Contents                                   *dbtpal-table-of-contents*
