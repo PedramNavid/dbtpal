@@ -64,8 +64,8 @@ use {
         vim.keymap.set("n", "<leader>drp", dbt.run_all)
         vim.keymap.set("n", "<leader>dtf", dbt.test)
         vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
-        vim.keymap.set("n", "<leader>dmu", require("dbtpal.telescope").dbt_picker_upstream)
-        vim.keymap.set("n", "<leader>dmd", require("dbtpal.telescope").dbt_picker_downstream)
+        vim.keymap.set("n", "<leader>dd", require("dbtpal.telescope").dbt_picker_upstream)
+        vim.keymap.set("n", "<leader>du", require("dbtpal.telescope").dbt_picker_downstream)
 
         -- Enable Telescope Extension
         require("telescope").load_extension("dbtpal")
@@ -96,8 +96,8 @@ use {
         { "<leader>drp", "<cmd>DbtRunAll<cr>" },
         { "<leader>dtf", "<cmd>DbtTest<cr>" },
         { "<leader>dm", "<cmd>lua require('dbtpal.telescope').dbt_picker()<cr>" },
-        { "<leader>dmu", "<cmd>lua require('dbtpal.telescope').dbt_picker_upstream()<cr>" },
-        { "<leader>dmd", "<cmd>lua require('dbtpal.telescope').dbt_picker_downstream" },
+        { "<leader>du", "<cmd>lua require('dbtpal.telescope').dbt_picker_upstream()<cr>" },
+        { "<leader>dd", "<cmd>lua require('dbtpal.telescope').dbt_picker_downstream" },
     },
     config = function()
         require("dbtpal").setup({
