@@ -40,9 +40,20 @@ M.dbt_models = function(tbl, opts)
         :find()
 end
 
-M.dbt_picker = function(opts)
+-- commands arguments like dbt `--select` require relative path to model from dbt project directory
+local _model_relative_path_to_dbt = function()
+    local b_full = vim.fn.expand "%:p"
+    local b_relative = b_full:sub(#config.options.path_to_dbt_project + 1)
+    if b_relative:sub(1, 1) == "/" then b_relative = b_relative:sub(2) end
+    return b_relative
+end
+
+local _picker = function(opts, additional_args)
+    additional_args = additional_args or {}
+
     local cmd = "ls"
     local args = { "--resource-type=model", "--output=json", "--quiet" }
+    args = vim.tbl_extend("force", args, additional_args)
 
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
@@ -53,29 +64,43 @@ M.dbt_picker = function(opts)
     end
 
     local dbt_path, cmd_args = commands.build_path_args(cmd, args)
+
     local response = {}
-    J
-        :new({
-            command = dbt_path,
-            args = cmd_args,
-            on_exit = function(j, code)
-                if code == 0 then
-                    response = j:result()
-                    log.trace(response)
-                    vim.schedule(function() M.dbt_models(response, opts) end)
-                else
-                    table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
-                    local a = table.concat(cmd_args, " ") or ""
-                    local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
-                    table.insert(response, "------------\n")
-                    table.insert(response, err)
-                    vim.list_extend(response, j:stderr_result())
-                    vim.list_extend(response, j:result())
-                    vim.schedule(function() display.popup(response) end)
-                end
-            end,
-        })
-        :start()
+    J:new({
+        command = dbt_path,
+        args = cmd_args,
+        on_exit = function(j, code)
+            if code == 0 then
+                response = j:result()
+                log.trace(response)
+                vim.schedule(function() M.dbt_models(response, opts) end)
+            else
+                table.insert(response, "Failed to run dbt command. Exit Code: " .. code .. "\n")
+                table.insert(response, config.options.path_to_dbt_project)
+                local a = table.concat(cmd_args, " ") or ""
+                local err = string.format("dbt command failed: %s %s\n\n", dbt_path, a)
+                table.insert(response, "------------\n")
+                table.insert(response, err)
+                vim.list_extend(response, j:stderr_result())
+                vim.list_extend(response, j:result())
+                vim.schedule(function() display.popup(response) end)
+            end
+        end,
+    }):start()
+end
+
+M.dbt_picker = function(opts) _picker(opts) end
+
+M.dbt_picker_downstream = function(opts)
+    local b_relative = _model_relative_path_to_dbt()
+    local additional_args = { "--select=" .. b_relative .. "+" }
+    _picker(opts, additional_args)
+end
+
+M.dbt_picker_upstream = function(opts)
+    local b_relative = _model_relative_path_to_dbt()
+    local additional_args = { "--select=+" .. b_relative }
+    _picker(opts, additional_args)
 end
 
 return M
