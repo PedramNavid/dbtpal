@@ -40,20 +40,19 @@ M.dbt_models = function(tbl, opts)
         :find()
 end
 
--- commands arguments like dbt `--select` require relative path to model from dbt project directory
-local _model_relative_path_to_dbt = function()
-    local b_full = vim.fn.expand "%:p"
-    local b_relative = b_full:sub(#config.options.path_to_dbt_project + 1)
-    if b_relative:sub(1, 1) == "/" then b_relative = b_relative:sub(2) end
-    return b_relative
+local _current_model_name = function()
+    -- `%` represents the current file.
+    -- `:t` extracts just the file name (tail), excluding the directory path.
+    -- `:r` removes the file extension from the file name.
+    return vim.fn.expand "%:t:r"
 end
 
 local _picker = function(opts, additional_args)
-    additional_args = additional_args or {}
-
     local cmd = "ls"
     local args = { "--resource-type=model", "--output=json", "--quiet" }
-    args = vim.tbl_extend("force", args, additional_args)
+
+    additional_args = additional_args or {}
+    vim.list_extend(args, additional_args)
 
     if config.options.path_to_dbt_project == "" then
         local bpath = vim.fn.expand "%:p:h"
@@ -92,14 +91,14 @@ end
 M.dbt_picker = function(opts) _picker(opts) end
 
 M.dbt_picker_downstream = function(opts)
-    local b_relative = _model_relative_path_to_dbt()
-    local additional_args = { "--select=" .. b_relative .. "+" }
+    local model = _current_model_name()
+    local additional_args = { "--select=" .. model .. "+" }
     _picker(opts, additional_args)
 end
 
 M.dbt_picker_upstream = function(opts)
-    local b_relative = _model_relative_path_to_dbt()
-    local additional_args = { "--select=+" .. b_relative }
+    local model = _current_model_name()
+    local additional_args = { "--select=+" .. model }
     _picker(opts, additional_args)
 end
 
