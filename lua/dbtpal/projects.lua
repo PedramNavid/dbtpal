@@ -28,7 +28,14 @@ M.detect_dbt_project_dir = function(bpath)
 end
 
 M._get_package_name = function()
-    local name = vim.fn.system [[grep -E 'name: \S+' ~/projects/clients/causal/internal_dbt/dbt_project.yml]]
+    local dbt_project_dir = function()
+        if config.options.path_to_dbt_project ~= "" then
+            return config.options.path_to_dbt_project
+        else
+            return _find_project_dir()
+        end
+    end
+    local name = vim.fn.system [[grep -E 'name: \S+' ]] + dbt_project_dir()
     return string.match(name, [[name:%s+['"]([%w_]+)]])
 end
 
