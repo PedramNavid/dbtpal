@@ -63,9 +63,7 @@ use {
             protect_compiled_files = true,
 
             -- additional flags to include at the beginning of the rendered dbt command
-            pre_cmd_args = {
-                "--printer-width=10",
-            },
+            pre_cmd_args = {},
 
             -- additional flags to include at the end of the rendered dbt command
             post_cmd_args = {},
@@ -118,9 +116,7 @@ use {
             include_log_level = true,
             extended_path_search = true,
             protect_compiled_files = true,
-            pre_cmd_args = {
-                "--printer-width=10",
-            },
+            pre_cmd_args = {},
             post_cmd_args = {},
         })
         require("telescope").load_extension("dbtpal")
@@ -229,7 +225,7 @@ The following options are available:
 | include_profiles_dir     | Include `--profiles-dir` flag in dbt command                             | `true`                             |
 | include_project_dir      | Include `--project-dir` flag in dbt command                              | `true`                             |
 | include_log_level        | Include `--log-level=INFO` flag in dbt command                           | `true`                             |
-| pre_cmd_args             | Additional flags to include at the beginning of the rendered dbt command | `{"--printer-width=10"}`           |
+| pre_cmd_args             | Additional flags to include at the beginning of the rendered dbt command | `{}`                            |
 | porst_cmd_args           | Additional flags to include at the end of the rendered dbt command       | `{}`                               |
 
 

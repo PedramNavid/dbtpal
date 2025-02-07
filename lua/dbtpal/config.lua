@@ -14,9 +14,7 @@ M.defaults = {
     extended_path_search = true,
     protect_compiled_files = true,
 
-    pre_cmd_args = {
-        "--printer-width=10",
-    },
+    pre_cmd_args = {},
     post_cmd_args = {},
 
     env = {
