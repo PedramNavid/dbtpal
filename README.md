@@ -224,7 +224,7 @@ The following options are available:
 | protect_compiled_files   | Prevent modifying sql files in target/(compiled\|run) folders            | `true`                             |
 | include_profiles_dir     | Include `--profiles-dir` flag in dbt command                             | `true`                             |
 | include_project_dir      | Include `--project-dir` flag in dbt command                              | `true`                             |
-| include_log_level        | Include `--log-level=INFO` flag in dbt command                           | `true`                             |
+| include_log_level        | Include `--log-level=INFO` flag in dbt command (only for dbt >= 1.5)     | `true`                             |
 | pre_cmd_args             | Additional flags to include at the beginning of the rendered dbt command | `{}`                            |
 | porst_cmd_args           | Additional flags to include at the end of the rendered dbt command       | `{}`                               |
 
