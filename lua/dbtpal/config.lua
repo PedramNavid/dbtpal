@@ -6,13 +6,16 @@ M.defaults = {
     path_to_dbt_project = "",
     path_to_dbt_profiles_dir = vim.fn.expand "~/.dbt",
 
+    include_profiles_dir = true,
+    include_project_dir = true,
+    include_log_level = true,
+
     custom_dbt_syntax_enabled = true,
     extended_path_search = true,
     protect_compiled_files = true,
 
-    pre_cmd_args = {
-        "--printer-width=10",
-    },
+    pre_cmd_args = {},
+    post_cmd_args = {},
 
     env = {
         ["DBT_LOG_LEVEL"] = "NONE",

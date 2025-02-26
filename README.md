@@ -51,11 +51,22 @@ use {
             -- Path to dbt profiles directory
             path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
 
+            -- flags to include in dbt command
+            include_profiles_dir = true,  -- --profiles-dir
+            include_project_dir = true,  -- --project-dir
+            include_log_level = true,  --  --log-level=INFO
+
             -- Search for ref/source files in macros and models folders
             extended_path_search = true,
 
             -- Prevent modifying sql files in target/(compiled|run) folders
             protect_compiled_files = true,
+
+            -- additional flags to include at the beginning of the rendered dbt command
+            pre_cmd_args = {},
+
+            -- additional flags to include at the end of the rendered dbt command
+            post_cmd_args = {},
         })
 
         -- Setup key mappings
@@ -100,8 +111,13 @@ use {
             path_to_dbt = "dbt",
             path_to_dbt_project = "",
             path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+            include_profiles_dir = true,
+            include_project_dir = true,
+            include_log_level = true,
             extended_path_search = true,
             protect_compiled_files = true,
+            pre_cmd_args = {},
+            post_cmd_args = {},
         })
         require("telescope").load_extension("dbtpal")
     end,
@@ -199,13 +215,19 @@ require("dbtpal").setup({ ... })
 
 The following options are available:
 
-| Option                   | Description                                              | Default                            |
-| ------                   | -----------                                              | -------                            |
-| path_to_dbt              | Path to the dbt executable                               | `dbt` (i.e. dbt in the local path) |
-| path_to_dbt_project      | Path to the dbt project                                  | `""` (auto-detect)                 |
-| path_to_dbt_profiles_dir | Path to dbt profiles directory                           | `"~/.dbt"`                         |
-| extended_path_search     | Search for ref/source files in macros and models folders | `true`                             |
-| protect_compiled_files   | Prevent modifying sql files in target/(compiled\|run) folders | `true`                    |
+| Option                   | Description                                                              | Default                            |
+| ------                   | -----------                                                              | -------                            |
+| path_to_dbt              | Path to the dbt executable                                               | `dbt` (i.e. dbt in the local path) |
+| path_to_dbt_project      | Path to the dbt project                                                  | `""` (auto-detect)                 |
+| path_to_dbt_profiles_dir | Path to dbt profiles directory                                           | `"~/.dbt"`                         |
+| extended_path_search     | Search for ref/source files in macros and models folders                 | `true`                             |
+| protect_compiled_files   | Prevent modifying sql files in target/(compiled\|run) folders            | `true`                             |
+| include_profiles_dir     | Include `--profiles-dir` flag in dbt command                             | `true`                             |
+| include_project_dir      | Include `--project-dir` flag in dbt command                              | `true`                             |
+| include_log_level        | Include `--log-level=INFO` flag in dbt command (only for dbt >= 1.5)     | `true`                             |
+| pre_cmd_args             | Additional flags to include at the beginning of the rendered dbt command | `{}`                            |
+| porst_cmd_args           | Additional flags to include at the end of the rendered dbt command       | `{}`                               |
+
 
 
 ### Misc
