@@ -22,7 +22,20 @@ M.test_model = main.test_model
 
 M.compile = main.compile
 M.build = main.build
+M.list = main.list
+M.docs_generate = main.docs_generate
+M.docs_serve = main.docs_serve
+M.run_operation = main.run_operation
+M.seed = main.seed
+M.show = main.show
+M.snapshot = main.snapshot
 
+-- no selectors needed
+M.clean = main.clean
+M.debug = main.debug
+M.deps = main.deps
+M.retry = main.retry
+M.parse = main.parse
 M.run_command = main.run_command
 M.debug = main.debug
 
