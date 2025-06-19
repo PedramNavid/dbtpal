@@ -97,7 +97,7 @@ use {
         { "<leader>dtf", "<cmd>DbtTest<cr>" },
         { "<leader>dm", "<cmd>lua require('dbtpal.telescope').dbt_picker()<cr>" },
         { "<leader>du", "<cmd>lua require('dbtpal.telescope').dbt_picker_upstream()<cr>" },
-        { "<leader>dd", "<cmd>lua require('dbtpal.telescope').dbt_picker_downstream" },
+        { "<leader>dd", "<cmd>lua require('dbtpal.telescope').dbt_picker_downstream()<cr>" },
     },
     config = function()
         require("dbtpal").setup({
