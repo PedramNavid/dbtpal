@@ -7,7 +7,9 @@ local log_level = vim.env.DBTPAL_LOG_LEVEL or vim.g.dbtpal_log_level
 ---@param msg string|string[]
 --@param opts? DbtNotifyOpts
 function M.notify(msg, opts)
-    if vim.in_fast_event() then return vim.schedule(function() M.notify(msg, opts) end) end
+    if vim.in_fast_event() then
+        return vim.schedule(function() M.notify(msg, opts) end)
+    end
 
     opts = opts or {}
     opts.log_level = log_level

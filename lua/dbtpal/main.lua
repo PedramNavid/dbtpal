@@ -41,13 +41,13 @@ M.test_all = function(args) return _test(nil, args) end
 
 M.test_model = function(selector, args) return _test(selector, args) end
 
-M.test = function() return _run(vim.fn.expand "%:t:r") end
+M.test = function() return _test(vim.fn.expand "%:t:r") end
 
 M.compile = function(selector, args) return _compile(selector, args) end
 
 M.build = function(selector, args) return _build(selector, args) end
 
-M.run_command = function(cmd, args) return _cmd_select_args(cmd, args) end
+M.run_command = function(cmd, args) return _cmd_select_args(cmd, nil, args) end
 
 M._create_job = function(cmd, args)
     log.info("dbt " .. cmd .. " queued")
