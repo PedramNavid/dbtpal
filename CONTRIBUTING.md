@@ -45,3 +45,7 @@ You may wish to increase the log level before opening Neovim
 DBTPAL_LOG_LEVEL=debug nvim
 ```
 
+## Testing in a blank environment
+
+Use `vim-plug` 
+nvim -U init.lua -c PlugInstall -c qa --headless
